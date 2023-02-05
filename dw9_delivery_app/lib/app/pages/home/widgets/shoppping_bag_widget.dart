@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/helpers/sizes_extensions.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../dto/order_product_dto.dart';
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
+import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 
 class ShopppingBagWidget extends StatelessWidget {
   const ShopppingBagWidget({
@@ -14,12 +15,22 @@ class ShopppingBagWidget extends StatelessWidget {
 
   final List<OrderProductDto> bag;
 
-  Future<void> _goOrder(BuildContext context) async {
+  Future<void> _goOrder(BuildContext context, [bool mounted = true]) async {
+    final controller = context.read<HomeController>();
     final sharedPreferences = await SharedPreferences.getInstance();
+
+    if (!mounted) return;
     final navigator = Navigator.of(context);
     if (!sharedPreferences.containsKey('accessToken')) {
       final loginResult = await navigator.pushNamed('/auth/login');
+      if (loginResult == null || loginResult == false) {
+        return;
+      }
     }
+    final updatedBag = await navigator.pushNamed('/order', arguments: bag);
+    controller.updateBag(
+      (updatedBag ?? const <OrderProductDto>[]) as List<OrderProductDto>,
+    );
   }
 
   @override

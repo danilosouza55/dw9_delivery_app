@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 
-import '../config/env/env.dart';
+import 'package:dw9_delivery_app/app/core/config/env/env.dart';
+
+import 'interceptors/auth_interceptor.dart';
 
 class CustomDio extends DioForNative {
   CustomDio()
@@ -17,15 +19,21 @@ class CustomDio extends DioForNative {
         requestBody: true,
         responseBody: true,
         requestHeader: true,
+        responseHeader: true,
       ),
     );
+    _authInterceptor = AuthInterceptor(dio: this);
   }
 
+  late AuthInterceptor _authInterceptor;
+
   CustomDio auth() {
+    interceptors.add(_authInterceptor);
     return this;
   }
 
   CustomDio unAuth() {
+    interceptors.remove(_authInterceptor);
     return this;
   }
 }

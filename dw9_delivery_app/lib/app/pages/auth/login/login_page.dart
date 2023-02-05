@@ -89,6 +89,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                         decoration: const InputDecoration(
                           labelText: 'Senha',
                         ),
+                        obscureText: true,
                       ),
                       const SizedBox(height: 30),
                       Center(

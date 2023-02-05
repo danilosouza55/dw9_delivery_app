@@ -1,10 +1,10 @@
 import 'dart:developer' as developer;
 
 import 'package:bloc/bloc.dart';
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 
-import '../../dto/order_product_dto.dart';
-import '../../repositories/products/products_repository.dart';
-import 'home_state.dart';
+import 'package:dw9_delivery_app/app/pages/home/home_state.dart';
+import 'package:dw9_delivery_app/app/repositories/products/products_repository.dart';
 
 class HomeController extends Cubit<HomeState> {
   HomeController({
@@ -61,6 +61,12 @@ class HomeController extends Cubit<HomeState> {
 
     emit(
       state.copyWith(shoppingBag: shoppingBag),
+    );
+  }
+
+  void updateBag(List<OrderProductDto> updatedBag) {
+    emit(
+      state.copyWith(shoppingBag: updatedBag),
     );
   }
 }
