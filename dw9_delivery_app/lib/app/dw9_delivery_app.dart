@@ -1,6 +1,8 @@
 import 'package:dw9_delivery_app/app/pages/auth/login/login_page.dart';
 import 'package:dw9_delivery_app/app/pages/auth/register/register_page.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_router.dart';
+import 'package:dw9_delivery_app/app/pages/order/order_completed_page.dart';
+import 'package:dw9_delivery_app/app/pages/order/order_router.dart';
 import 'package:dw9_delivery_app/app/pages/product_detail/product_detail_router.dart';
 import 'package:dw9_delivery_app/app/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class _Dw9DeliveryAppState extends State<Dw9DeliveryApp> {
           '/product-detail': (context) => ProductDetailRouter.page,
           '/auth/login': (context) => const LoginPage(),
           '/auth/register': (context) => const RegisterPage(),
+          '/order': (context) => OrderRouter.page,
+          '/order/completed': (context) => const OrderCompletedPage(),
         },
       ),
     );
