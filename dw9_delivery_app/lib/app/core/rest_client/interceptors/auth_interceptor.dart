@@ -20,7 +20,7 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('accessToken');
+    final accessToken = sharedPreferences.getString('access_token');
 
     if (accessToken != null) {
       options.headers['Authorization'] = 'Bearer $accessToken';
@@ -67,7 +67,7 @@ class AuthInterceptor extends Interceptor {
       );
 
       await sharedPreferences.setString(
-        'accessToken',
+        'access_token',
         resultRefresh.data!['access_token'],
       );
 

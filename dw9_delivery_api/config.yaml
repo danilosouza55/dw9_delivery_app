@@ -14,3 +14,9 @@ auth:
          method: get
       - /products/{*}:
           method: get
+      - /payment-types:
+          method: get
+      - /payment-types:
+          method: post
+      - /orders:
+          method: post

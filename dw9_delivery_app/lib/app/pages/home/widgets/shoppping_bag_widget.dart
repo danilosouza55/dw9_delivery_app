@@ -21,7 +21,7 @@ class ShopppingBagWidget extends StatelessWidget {
 
     if (!mounted) return;
     final navigator = Navigator.of(context);
-    if (!sharedPreferences.containsKey('accessToken')) {
+    if (!sharedPreferences.containsKey('access_token')) {
       final loginResult = await navigator.pushNamed('/auth/login');
       if (loginResult == null || loginResult == false) {
         return;
